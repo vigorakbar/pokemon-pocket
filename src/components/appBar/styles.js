@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { flexAllCenter } from "../../styles/commonPosition";
+import { flexAllCenter } from "../../styles/common";
 import palettes from "../../const/palettes";
 
 export const cssAppBar = (isDetailPage) => css`

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { biggerOnHover } from "../../../styles/animation";
-import { flexAllCenter } from "../../../styles/commonPosition";
+import { flexAllCenter, fontFamily } from "../../../styles/common";
 import pokeColorMap from "../../../const/pokeColorMap";
 import palettes from "../../../const/palettes";
 
@@ -79,8 +79,7 @@ export const cssTypesWrapper = (colorId) => css`
     margin-bottom: 6px;
     background-color: ${pokeColorMap[colorId]};
     filter: brightness(130%);
-    font-family: "Helvetica Neue", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-      "Cantarell", "Fira Sans", "Droid Sans", sans-serif;
+    ${fontFamily}
   }
 `;
 

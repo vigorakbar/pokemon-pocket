@@ -8,7 +8,7 @@ import PokemonListContainer from "../../container/PokemonListContainer";
 import PageTitle from "../../text/PageTitle";
 import { cssCardsWrapper } from "../pokedex/styles";
 import EmptyPocketIcon from "../../../assets/icons/pocket-empty.png";
-import { flexAllCenter } from "../../../styles/commonPosition";
+import { flexAllCenter } from "../../../styles/common";
 
 const mock = [
   {
