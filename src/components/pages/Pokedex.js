@@ -197,11 +197,7 @@ const Pokedex = (props) => {
   return (
     <div>
       <div>
-        <PageTitle
-          css={css`
-            margin-top: 32px;
-          `}
-        >
+        <PageTitle>
           Pokedex
         </PageTitle>
         <div
@@ -236,8 +232,11 @@ const Pokedex = (props) => {
                 >
                   <div
                     css={css`
+                      display: flex;
+                      flex-direction: column;
                       padding: 20px;
                       width: 100%;
+                      height: calc(100% - 40px);
                     `}
                   >
                     <Typography
@@ -252,7 +251,7 @@ const Pokedex = (props) => {
                     <div
                       css={css`
                         max-width: 40%;
-                        margin-top: 10px;
+                        margin: 10px 0px;
                       `}
                     >
                       {pokemon.pokemon_v2_pokemontypes.map((type) => (
@@ -270,6 +269,44 @@ const Pokedex = (props) => {
                           label={titleCase(type.pokemon_v2_type.name)}
                         />
                       ))}
+                    </div>
+                    <div
+                      css={css`
+                        flex-grow: 1;
+                        display: flex;
+                        align-items: flex-end;
+                      `}
+                    >
+                      <div
+                        css={css`
+                          position: relative;
+                          margin-left: 12px;
+                          &::before {
+                            content: "";
+                            display: block;
+                            position: absolute;
+                            background-color: ${pokeColorMap[colorId]};
+                            filter: brightness(80%);
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 16px;
+                            padding: 4px 12px;
+                            top: -4px;
+                            left: -12px;
+                          }
+                        `}
+                      >
+                        <div
+                          css={css`
+                            position: relative;
+                            color: white;
+                          `}
+                        >
+                          <Typography variant="body2">
+                            Owned: <b>{pokemon.owned || 0}</b>
+                          </Typography>
+                        </div>
+                      </div>
                     </div>
                     <img
                       css={css`
