@@ -70,11 +70,11 @@ export const cssCardBody = css`
   }
 `;
 
-export const cssAbilityWrapper = (colorId) => css`
+export const cssTypesWrapper = (colorId) => css`
   max-width: 50%;
   margin: 6px 0px;
 
-  .ability-chip {
+  .types-chip {
     margin-right: 6px;
     margin-bottom: 6px;
     background-color: ${pokeColorMap[colorId]};

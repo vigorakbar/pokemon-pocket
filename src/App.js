@@ -18,6 +18,7 @@ function App() {
       <Container
         css={css`
           margin-top: 72px;
+          min-height: calc(100vh - 72px);
         `}
       >
         <Switch>

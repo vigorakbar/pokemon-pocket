@@ -2,7 +2,6 @@
 import {
   Card,
   CardActionArea,
-  Chip,
   IconButton,
   Typography,
 } from "@material-ui/core";
@@ -12,13 +11,14 @@ import { spriteURL } from "../../../const/common";
 import pokeColorMap from "../../../const/pokeColorMap";
 import { titleCase } from "../../../util/string";
 import {
-  cssAbilityWrapper,
+  cssTypesWrapper,
   cssCardActionArea,
   cssCardBody,
   cssOwnedContainer,
   cssPokeCards,
 } from "../../pages/pokedex/styles";
 import PokeballShadowIcon from "../../svg/PokeballShadowIcon";
+import AbilityChip from "./TypeChip";
 
 const stopPropagation = (e) => e.stopPropagation();
 
@@ -41,13 +41,9 @@ const PokemonCard = ({
           <Typography variant="h5" className="pokemon-name">
             {titleCase(pokemon.name)}
           </Typography>
-          <div css={cssAbilityWrapper(colorId)}>
+          <div css={cssTypesWrapper(colorId)}>
             {pokemon.pokemon_v2_pokemontypes.map((type, i) => (
-              <Chip
-                className="ability-chip"
-                key={i}
-                label={titleCase(type.pokemon_v2_type.name)}
-              />
+              <AbilityChip key={i} name={type.pokemon_v2_type.name} />
             ))}
           </div>
           <div css={cssOwnedContainer(colorId)}>
@@ -75,6 +71,7 @@ const PokemonCard = ({
                 onDelete();
               }}
               onMouseDown={stopPropagation}
+              onTouchStart={stopPropagation}
             >
               <DeleteIcon />
             </IconButton>
