@@ -5,6 +5,7 @@ import { spriteURL } from "../../../const/common";
 import pokeColorMap from "../../../const/pokeColorMap";
 
 import { titleCase } from "../../../util/string";
+import PokemonListContainer from "../../container/PokemonListContainer";
 import PokeballShadowIcon from "../../svg/PokeballShadowIcon";
 import PageTitle from "../../text/PageTitle";
 import {
@@ -13,7 +14,6 @@ import {
   cssCardBody,
   cssCardsWrapper,
   cssOwnedContainer,
-  cssPageDecor,
   cssPokeCards,
 } from "./styles";
 
@@ -34,6 +34,12 @@ const mock = [
       {
         pokemon_v2_type: {
           name: "poison",
+          id: 4,
+        },
+      },
+      {
+        pokemon_v2_type: {
+          name: "fire",
           id: 4,
         },
       },
@@ -202,55 +208,52 @@ const Pokedex = (props) => {
   }, []);
 
   return (
-    <div>
-      <div>
-        <PageTitle>Pokedex</PageTitle>
-        <div css={cssCardsWrapper}>
-          {pokemons.map((pokemon) => {
-            const colorId = pokemon.pokemon_v2_pokemonspecy.pokemon_color_id;
-            return (
-              <Card key={pokemon.id} css={cssPokeCards(colorId)}>
-                <CardActionArea css={cssCardActionArea}>
-                  <div css={cssCardBody}>
-                    <Typography variant="h5" className="pokemon-name">
-                      {titleCase(pokemon.name)}
-                    </Typography>
-                    <div css={cssAbilityWrapper(colorId)}>
-                      {pokemon.pokemon_v2_pokemontypes.map((type) => (
-                        <Chip
-                          className="ability-chip"
-                          key={`${pokemon.id}${type.pokemon_v2_type.id}`}
-                          label={titleCase(type.pokemon_v2_type.name)}
-                        />
-                      ))}
-                    </div>
-                    <div css={cssOwnedContainer(colorId)}>
-                      <div className="owned-inner-container">
-                        <div className="owned-wrapper">
-                          <Typography variant="body2">
-                            Owned: <b>{pokemon.owned || 0}</b>
-                          </Typography>
-                        </div>
+    <PokemonListContainer>
+      <PageTitle>Pokedex</PageTitle>
+      <div css={cssCardsWrapper}>
+        {pokemons.map((pokemon) => {
+          const colorId = pokemon.pokemon_v2_pokemonspecy.pokemon_color_id;
+          return (
+            <Card key={pokemon.id} css={cssPokeCards(colorId)}>
+              <CardActionArea css={cssCardActionArea}>
+                <div css={cssCardBody}>
+                  <Typography variant="h5" className="pokemon-name">
+                    {titleCase(pokemon.name)}
+                  </Typography>
+                  <div css={cssAbilityWrapper(colorId)}>
+                    {pokemon.pokemon_v2_pokemontypes.map((type) => (
+                      <Chip
+                        className="ability-chip"
+                        key={`${pokemon.id}${type.pokemon_v2_type.id}`}
+                        label={titleCase(type.pokemon_v2_type.name)}
+                      />
+                    ))}
+                  </div>
+                  <div css={cssOwnedContainer(colorId)}>
+                    <div className="owned-inner-container">
+                      <div className="owned-wrapper">
+                        <Typography variant="body2">
+                          Owned: <b>{pokemon.owned || 0}</b>
+                        </Typography>
                       </div>
                     </div>
-                    <img
-                      className="pokemon-sprite"
-                      src={`${spriteURL}${pokemon.id}.png`}
-                      alt="pokemon sprite"
-                    />
-                    <PokeballShadowIcon
-                      className="card-pokeball-decor"
-                      color={pokeColorMap[colorId]}
-                    />
                   </div>
-                </CardActionArea>
-              </Card>
-            );
-          })}
-        </div>
+                  <img
+                    className="pokemon-sprite"
+                    src={`${spriteURL}${pokemon.id}.png`}
+                    alt="pokemon sprite"
+                  />
+                  <PokeballShadowIcon
+                    className="card-pokeball-decor"
+                    color={pokeColorMap[colorId]}
+                  />
+                </div>
+              </CardActionArea>
+            </Card>
+          );
+        })}
       </div>
-      <PokeballShadowIcon css={cssPageDecor} />
-    </div>
+    </PokemonListContainer>
   );
 };
 

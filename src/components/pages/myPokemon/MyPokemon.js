@@ -1,5 +1,12 @@
+import PokemonListContainer from "../../container/PokemonListContainer";
+import PageTitle from "../../text/PageTitle";
+
 const MyPokemon = () => {
-  return <div>My Pokemon</div>;
+  return (
+    <PokemonListContainer>
+      <PageTitle>My Pokemon</PageTitle>
+    </PokemonListContainer>
+  );
 };
 
 export default MyPokemon;

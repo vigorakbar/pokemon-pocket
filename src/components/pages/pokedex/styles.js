@@ -13,6 +13,7 @@ export const cssPokeCards = (colorId) => css`
   ${biggerOnHover}
   height: 200px;
   width: 320px;
+  min-width: 300px;
   margin: 12px;
   background-color: ${pokeColorMap[colorId]};
   border-radius: 20px;
@@ -29,7 +30,7 @@ export const cssCardActionArea = css`
 export const cssCardBody = css`
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 16px;
   width: 100%;
   height: calc(100% - 40px);
 
@@ -59,8 +60,8 @@ export const cssCardBody = css`
 `;
 
 export const cssAbilityWrapper = (colorId) => css`
-  max-width: 40%;
-  margin: 10px 0px;
+  max-width: 50%;
+  margin: 6px 0px;
 
   .ability-chip {
     margin-right: 6px;
@@ -76,6 +77,7 @@ export const cssOwnedContainer = (colorId) => css`
   flex-grow: 1;
   display: flex;
   align-items: flex-end;
+  max-width: 55%;
 
   .owned-inner-container {
     position: relative;
@@ -99,14 +101,4 @@ export const cssOwnedContainer = (colorId) => css`
     position: relative;
     color: white;
   }
-`;
-
-export const cssPageDecor = css`
-  position: fixed;
-  width: 200px;
-  height: 200px;
-  right: -75px;
-  top: 0;
-  opacity: 0.2;
-  z-index: -1;
 `;
