@@ -15,7 +15,7 @@ import {
   cssOwnedContainer,
   cssPageDecor,
   cssPokeCards,
-} from "./style";
+} from "./styles";
 
 const mock = [
   {

@@ -2,10 +2,10 @@
 import { css } from "@emotion/react";
 import { Container } from "@material-ui/core";
 import { Route, Switch } from "react-router";
-import DefaultAppBar from "./components/appBar/DefaultAppBar";
-import MyPokemon from "./components/pages/MyPokemon";
+import DefaultAppBar from "./components/appBar/AppBar";
+import MyPokemon from "./components/pages/myPokemon/MyPokemon";
 import Pokedex from "./components/pages/pokedex/Pokedex";
-import PokemonDetail from "./components/pages/PokemonDetail";
+import PokemonDetail from "./components/pages/pokemonDetail/PokemonDetail";
 
 function App() {
   return (
