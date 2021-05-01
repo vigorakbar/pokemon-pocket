@@ -1,19 +1,19 @@
 /** @jsxImportSource @emotion/react */
-import { css, useTheme } from "@emotion/react";
+import { css } from "@emotion/react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import AppIcon from "../../assets/icons/pokeball.png";
 import PokeBagIcon from "../../assets/icons/pokebag.png";
 import { flexAllCenter } from "../../styles/commonPosition";
 import HideOnScroll from "../transitions/HideOnScroll";
+import palettes from "../../const/palettes";
 
 const DefaultAppBar = (props) => {
-  const theme = useTheme();
   return (
     <HideOnScroll>
       <AppBar
         css={css`
-          background-color: ${theme.pokeColors.red};
+          background-color: ${palettes.pokeColors.red};
           box-shadow: unset;
         `}
         {...props}

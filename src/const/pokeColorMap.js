@@ -1,6 +1,6 @@
-import theme from "../styles/theme";
+import palettes from "./palettes";
 
-const { pokeColors } = theme;
+const { pokeColors } = palettes;
 
 // map some color to its similar color for simplicity
 // ex: black pokemon is mapped to gray color
