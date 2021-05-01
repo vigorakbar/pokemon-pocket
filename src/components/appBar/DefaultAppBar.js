@@ -8,80 +8,73 @@ import { flexAllCenter } from "../../styles/commonPosition";
 import HideOnScroll from "../transitions/HideOnScroll";
 import palettes from "../../const/palettes";
 
+const cssAppBar = css`
+  background-color: ${palettes.pokeColors.red};
+  box-shadow: unset;
+`;
+
+const cssToolbar = css`
+  justify-content: space-between;
+`;
+
+const cssMainMenu = css`
+  line-height: 1.2;
+  max-width: 50%;
+  font-weight: 600;
+
+  .icon-wrapper {
+    ${flexAllCenter}
+    margin: 12px 0;
+  }
+
+  .icon-main-menu {
+    height: 48px;
+    width: 48px;
+    margin-right: 12px;
+  }
+`;
+
+const cssMenuLabel = css`
+  color: white;
+`;
+
+const cssMyPokeMenu = css`
+  max-width: 36%;
+
+  .icon-wrapper {
+    ${flexAllCenter}
+  }
+
+  .icon-my-poke {
+    margin-right: 4px;
+  }
+`;
+
 const DefaultAppBar = (props) => {
   return (
     <HideOnScroll>
-      <AppBar
-        css={css`
-          background-color: ${palettes.pokeColors.red};
-          box-shadow: unset;
-        `}
-        {...props}
-      >
-        <Toolbar
-          css={css`
-            justify-content: space-between;
-          `}
-        >
-          <Typography
-            variant="h6"
-            css={css`
-              line-height: 1.2;
-              max-width: 50%;
-              font-weight: 600;
-            `}
-          >
+      <AppBar css={cssAppBar} {...props}>
+        <Toolbar css={cssToolbar}>
+          <Typography css={cssMainMenu} variant="h6">
             <Link to="/">
-              <div
-                css={css`
-                  ${flexAllCenter}
-                  margin: 12px 0;
-                `}
-              >
+              <div className="icon-wrapper">
                 <img
-                  css={css`
-                    height: 48px;
-                    width: 48px;
-                    margin-right: 12px;
-                  `}
+                  className="icon-main-menu"
                   src={AppIcon}
                   alt="pokeball icon"
                 />
-                <span
-                  css={css`
-                    color: white;
-                  `}
-                >
-                  Pokemon Pocket
-                </span>
+                <span css={cssMenuLabel}>Pokemon Pocket</span>
               </div>
             </Link>
           </Typography>
-          <Link
-            to="/my-pokemon"
-            css={css`
-              max-width: 36%;
-            `}
-          >
-            <div
-              css={css`
-                ${flexAllCenter}
-              `}
-            >
+          <Link to="/my-pokemon" css={cssMyPokeMenu}>
+            <div className="icon-wrapper">
               <img
                 src={PokeBagIcon}
                 alt="my pokemon icon"
-                css={css`
-                  margin-right: 4px;
-                `}
+                className="icon-my-poke"
               />
-              <span
-                css={css`
-                  color: white;
-                `}
-              >
-                My Pocket
-              </span>
+              <span css={cssMenuLabel}>My Pocket</span>
             </div>
           </Link>
         </Toolbar>
