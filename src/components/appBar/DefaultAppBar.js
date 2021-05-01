@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import AppIcon from "../../assets/icons/pokeball.png";
 import PokeBagIcon from "../../assets/icons/pokebag.png";
 import { flexAllCenter } from "../../styles/commonPosition";
-import HideOnScroll from "../Transition/HideOnScroll";
+import HideOnScroll from "../transitions/HideOnScroll";
 
 const DefaultAppBar = (props) => {
   const theme = useTheme();

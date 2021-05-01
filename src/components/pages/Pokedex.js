@@ -1,32 +1,126 @@
 /** @jsxImportSource @emotion/react */
-import { css, useTheme } from "@emotion/react";
+import { css } from "@emotion/react";
 import { Card, CardActionArea, Chip, Typography } from "@material-ui/core";
-import { useState } from "react";
-import { spriteURL } from "../../../const/common";
-import pokeColorMap from "../../../const/pokeColorMap";
-import { biggerOnHover } from "../../../styles/animation";
-import { flexAllCenter } from "../../../styles/commonPosition";
-import { titleCase } from "../../../util/string";
-import PokeballShadowIcon from "../../svg/PokeballShadowIcon";
+import { useEffect, useState } from "react";
+import { spriteURL } from "../../const/common";
+import pokeColorMap from "../../const/pokeColorMap";
+import { biggerOnHover } from "../../styles/animation";
+import { flexAllCenter } from "../../styles/commonPosition";
+import { titleCase } from "../../util/string";
+import PokeballShadowIcon from "../svg/PokeballShadowIcon";
+import PageTitle from "../text/PageTitle";
 
 const mock = [
   {
     pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 2,
+      pokemon_color_id: 5,
     },
-    name: "inteleon",
-    id: 818,
-    pokemon_v2_pokemonabilities: [
+    name: "bulbasaur",
+    id: 1,
+    pokemon_v2_pokemontypes: [
       {
-        pokemon_v2_ability: {
-          name: "torrent",
-          id: 67,
+        pokemon_v2_type: {
+          name: "grass",
+          id: 12,
         },
       },
       {
-        pokemon_v2_ability: {
-          name: "sniper",
-          id: 97,
+        pokemon_v2_type: {
+          name: "poison",
+          id: 4,
+        },
+      },
+    ],
+  },
+  {
+    pokemon_v2_pokemonspecy: {
+      pokemon_color_id: 5,
+    },
+    name: "ivysaur",
+    id: 2,
+    pokemon_v2_pokemontypes: [
+      {
+        pokemon_v2_type: {
+          name: "grass",
+          id: 12,
+        },
+      },
+      {
+        pokemon_v2_type: {
+          name: "poison",
+          id: 4,
+        },
+      },
+    ],
+  },
+  {
+    pokemon_v2_pokemonspecy: {
+      pokemon_color_id: 5,
+    },
+    name: "venusaur",
+    id: 3,
+    pokemon_v2_pokemontypes: [
+      {
+        pokemon_v2_type: {
+          name: "grass",
+          id: 12,
+        },
+      },
+      {
+        pokemon_v2_type: {
+          name: "poison",
+          id: 4,
+        },
+      },
+    ],
+  },
+  {
+    pokemon_v2_pokemonspecy: {
+      pokemon_color_id: 8,
+    },
+    name: "charmander",
+    id: 4,
+    pokemon_v2_pokemontypes: [
+      {
+        pokemon_v2_type: {
+          name: "fire",
+          id: 10,
+        },
+      },
+    ],
+  },
+  {
+    pokemon_v2_pokemonspecy: {
+      pokemon_color_id: 8,
+    },
+    name: "charmeleon",
+    id: 5,
+    pokemon_v2_pokemontypes: [
+      {
+        pokemon_v2_type: {
+          name: "fire",
+          id: 10,
+        },
+      },
+    ],
+  },
+  {
+    pokemon_v2_pokemonspecy: {
+      pokemon_color_id: 8,
+    },
+    name: "charizard",
+    id: 6,
+    pokemon_v2_pokemontypes: [
+      {
+        pokemon_v2_type: {
+          name: "fire",
+          id: 10,
+        },
+      },
+      {
+        pokemon_v2_type: {
+          name: "flying",
+          id: 3,
         },
       },
     ],
@@ -35,61 +129,13 @@ const mock = [
     pokemon_v2_pokemonspecy: {
       pokemon_color_id: 2,
     },
-    name: "inteleon-gmax",
-    id: 10202,
-    pokemon_v2_pokemonabilities: [
+    name: "squirtle",
+    id: 7,
+    pokemon_v2_pokemontypes: [
       {
-        pokemon_v2_ability: {
-          name: "torrent",
-          id: 67,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "sniper",
-          id: 97,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 3,
-    },
-    name: "skwovet",
-    id: 819,
-    pokemon_v2_pokemonabilities: [
-      {
-        pokemon_v2_ability: {
-          name: "gluttony",
-          id: 82,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "cheek-pouch",
-          id: 167,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 3,
-    },
-    name: "greedent",
-    id: 820,
-    pokemon_v2_pokemonabilities: [
-      {
-        pokemon_v2_ability: {
-          name: "gluttony",
-          id: 82,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "cheek-pouch",
-          id: 167,
+        pokemon_v2_type: {
+          name: "water",
+          id: 11,
         },
       },
     ],
@@ -98,25 +144,13 @@ const mock = [
     pokemon_v2_pokemonspecy: {
       pokemon_color_id: 2,
     },
-    name: "rookidee",
-    id: 821,
-    pokemon_v2_pokemonabilities: [
+    name: "wartortle",
+    id: 8,
+    pokemon_v2_pokemontypes: [
       {
-        pokemon_v2_ability: {
-          name: "keen-eye",
-          id: 51,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "unnerve",
-          id: 127,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "big-pecks",
-          id: 145,
+        pokemon_v2_type: {
+          name: "water",
+          id: 11,
         },
       },
     ],
@@ -125,133 +159,28 @@ const mock = [
     pokemon_v2_pokemonspecy: {
       pokemon_color_id: 2,
     },
-    name: "corvisquire",
-    id: 822,
-    pokemon_v2_pokemonabilities: [
+    name: "blastoise",
+    id: 9,
+    pokemon_v2_pokemontypes: [
       {
-        pokemon_v2_ability: {
-          name: "keen-eye",
-          id: 51,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "unnerve",
-          id: 127,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "big-pecks",
-          id: 145,
+        pokemon_v2_type: {
+          name: "water",
+          id: 11,
         },
       },
     ],
   },
   {
     pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 7,
+      pokemon_color_id: 5,
     },
-    name: "corviknight",
-    id: 823,
-    pokemon_v2_pokemonabilities: [
+    name: "caterpie",
+    id: 10,
+    pokemon_v2_pokemontypes: [
       {
-        pokemon_v2_ability: {
-          name: "pressure",
-          id: 46,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "unnerve",
-          id: 127,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "mirror-armor",
-          id: 240,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 7,
-    },
-    name: "corviknight-gmax",
-    id: 10203,
-    pokemon_v2_pokemonabilities: [
-      {
-        pokemon_v2_ability: {
-          name: "pressure",
-          id: 46,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "unnerve",
-          id: 127,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "mirror-armor",
-          id: 240,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 2,
-    },
-    name: "blipbug",
-    id: 824,
-    pokemon_v2_pokemonabilities: [
-      {
-        pokemon_v2_ability: {
-          name: "compound-eyes",
-          id: 14,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "swarm",
-          id: 68,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "telepathy",
-          id: 140,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 10,
-    },
-    name: "dottler",
-    id: 825,
-    pokemon_v2_pokemonabilities: [
-      {
-        pokemon_v2_ability: {
-          name: "compound-eyes",
-          id: 14,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "swarm",
-          id: 68,
-        },
-      },
-      {
-        pokemon_v2_ability: {
-          name: "telepathy",
-          id: 140,
+        pokemon_v2_type: {
+          name: "bug",
+          id: 7,
         },
       },
     ],
@@ -259,22 +188,22 @@ const mock = [
 ];
 
 const Pokedex = (props) => {
-  const [pokemons, setPokemons] = useState(mock);
-  const theme = useTheme();
+  const [pokemons, setPokemons] = useState([]);
+
+  useEffect(() => {
+    setPokemons(mock);
+  }, []);
 
   return (
     <div>
       <div>
-        <Typography
-          variant="h4"
+        <PageTitle
           css={css`
-            color: ${theme.colors.black};
-            font-weight: 600;
             margin-top: 32px;
           `}
         >
           Pokedex
-        </Typography>
+        </PageTitle>
         <div
           css={css`
             ${flexAllCenter}
@@ -322,11 +251,11 @@ const Pokedex = (props) => {
                     </Typography>
                     <div
                       css={css`
-                        max-width: 50%;
+                        max-width: 40%;
                         margin-top: 10px;
                       `}
                     >
-                      {pokemon.pokemon_v2_pokemonabilities.map((ability) => (
+                      {pokemon.pokemon_v2_pokemontypes.map((type) => (
                         <Chip
                           css={css`
                             margin-right: 6px;
@@ -337,16 +266,16 @@ const Pokedex = (props) => {
                               "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
                               "Droid Sans", sans-serif;
                           `}
-                          key={`${pokemon.id}${ability.pokemon_v2_ability.id}`}
-                          label={titleCase(ability.pokemon_v2_ability.name)}
+                          key={`${pokemon.id}${type.pokemon_v2_type.id}`}
+                          label={titleCase(type.pokemon_v2_type.name)}
                         />
                       ))}
                     </div>
                     <img
                       css={css`
                         position: absolute;
-                        width: 140px;
-                        height: 140px;
+                        width: 150px;
+                        height: 150px;
                         right: 2px;
                         bottom: 2px;
                         z-index: 1;
@@ -357,8 +286,8 @@ const Pokedex = (props) => {
                     <PokeballShadowIcon
                       css={css`
                         position: absolute;
-                        width: 100px;
-                        height: 100px;
+                        width: 125px;
+                        height: 125px;
                         right: 0px;
                         bottom: 0;
                         opacity: 0.35;
