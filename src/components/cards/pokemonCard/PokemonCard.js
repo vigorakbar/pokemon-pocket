@@ -19,11 +19,19 @@ import {
 } from "../../pages/pokedex/styles";
 import PokeballShadowIcon from "../../svg/PokeballShadowIcon";
 
-const PokemonCard = ({ pokemon, ...otherProps }) => {
+const stopPropagation = (e) => e.stopPropagation();
+
+const PokemonCard = ({
+  pokemon,
+  onClick,
+  onDelete,
+  animateHover = true,
+  ...otherProps
+}) => {
   const colorId = pokemon.pokemon_v2_pokemonspecy.pokemon_color_id;
   return (
-    <Card css={cssPokeCards(colorId)} {...otherProps}>
-      <CardActionArea css={cssCardActionArea}>
+    <Card css={cssPokeCards(colorId, animateHover)} {...otherProps}>
+      <CardActionArea css={cssCardActionArea} onClick={onClick}>
         <div css={cssCardBody}>
           <Typography variant="h5" className="pokemon-name">
             {titleCase(pokemon.name)}
@@ -41,14 +49,31 @@ const PokemonCard = ({ pokemon, ...otherProps }) => {
             <div className="owned-inner-container">
               <div className="owned-wrapper">
                 <Typography variant="body2">
-                  Owned: <b>{pokemon.owned || 0}</b>
+                  {onDelete ? (
+                    <b>{pokemon.nickname}</b>
+                  ) : (
+                    <>
+                      Owned: <b>{pokemon.owned || 0}</b>
+                    </>
+                  )}
                 </Typography>
               </div>
             </div>
           </div>
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
+          {onDelete && (
+            <IconButton
+              component="span"
+              className="delete-pokemon"
+              aria-label="delete"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
+              onMouseDown={stopPropagation}
+            >
+              <DeleteIcon />
+            </IconButton>
+          )}
           <img
             className="pokemon-sprite"
             src={`${spriteURL}${pokemon.id}.png`}

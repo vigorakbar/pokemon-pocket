@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { biggerOnHover } from "../../../styles/animation";
 import { flexAllCenter } from "../../../styles/commonPosition";
 import pokeColorMap from "../../../const/pokeColorMap";
+import palettes from "../../../const/palettes";
 
 export const cssCardsWrapper = css`
   ${flexAllCenter}
@@ -9,8 +10,8 @@ export const cssCardsWrapper = css`
   margin: 28px 0;
 `;
 
-export const cssPokeCards = (colorId) => css`
-  ${biggerOnHover}
+export const cssPokeCards = (colorId, animateHover) => css`
+  ${animateHover && biggerOnHover}
   height: 200px;
   width: 320px;
   min-width: 300px;
@@ -37,6 +38,16 @@ export const cssCardBody = css`
   .pokemon-name {
     font-weight: 600;
     color: white;
+  }
+
+  .delete-pokemon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: 1px solid;
+    &:hover {
+      color: ${palettes.pokeColors.red};
+    }
   }
 
   .pokemon-sprite {

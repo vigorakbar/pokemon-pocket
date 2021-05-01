@@ -16,6 +16,7 @@ const mock = [
       pokemon_color_id: 2,
     },
     name: "blastoise",
+    nickname: "YEE",
     id: 9,
     pokemon_v2_pokemontypes: [
       {
@@ -31,6 +32,7 @@ const mock = [
       pokemon_color_id: 5,
     },
     name: "caterpie",
+    nickname: "ASS",
     id: 10,
     pokemon_v2_pokemontypes: [
       {
@@ -56,7 +58,15 @@ const MyPokemon = () => {
       <div css={cssCardsWrapper}>
         {pokemons.length ? (
           pokemons.map((pokemon) => {
-            return <PokemonCard key={pokemon.id} pokemon={pokemon} />;
+            return (
+              <PokemonCard
+                key={pokemon.id}
+                pokemon={pokemon}
+                onDelete={() => console.log("delete!")}
+                animateHover={false}
+                onClick={() => console.log("Clicked!")}
+              />
+            );
           })
         ) : (
           <div
