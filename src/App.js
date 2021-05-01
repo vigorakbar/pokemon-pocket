@@ -4,7 +4,7 @@ import { Container } from "@material-ui/core";
 import { Route, Switch } from "react-router";
 import DefaultAppBar from "./components/appBar/DefaultAppBar";
 import MyPokemon from "./components/pages/MyPokemon";
-import Pokedex from "./components/pages/Pokedex";
+import Pokedex from "./components/pages/pokedex/Pokedex";
 import PokemonDetail from "./components/pages/PokemonDetail";
 
 function App() {
