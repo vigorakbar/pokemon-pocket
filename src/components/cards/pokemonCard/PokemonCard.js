@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useHistory } from "react-router";
 import { spriteURL } from "../../../const/common";
 import pokeColorMap from "../../../const/pokeColorMap";
 import { titleCase } from "../../../util/string";
@@ -29,9 +30,13 @@ const PokemonCard = ({
   ...otherProps
 }) => {
   const colorId = pokemon.pokemon_v2_pokemonspecy.pokemon_color_id;
+  const history = useHistory();
+  const onClickCard = () => {
+    history.push(`/pokemon/${pokemon.id}`);
+  };
   return (
     <Card css={cssPokeCards(colorId, animateHover)} {...otherProps}>
-      <CardActionArea css={cssCardActionArea} onClick={onClick}>
+      <CardActionArea css={cssCardActionArea} onClick={onClickCard}>
         <div css={cssCardBody}>
           <Typography variant="h5" className="pokemon-name">
             {titleCase(pokemon.name)}
