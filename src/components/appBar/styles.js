@@ -2,8 +2,8 @@ import { css } from "@emotion/react";
 import { flexAllCenter } from "../../styles/commonPosition";
 import palettes from "../../const/palettes";
 
-export const cssAppBar = css`
-  background-color: ${palettes.pokeColors.red};
+export const cssAppBar = (isDetailPage) => css`
+  background: ${isDetailPage ? 'transparent' : palettes.pokeColors.red};
   box-shadow: unset;
 `;
 

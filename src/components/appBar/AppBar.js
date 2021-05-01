@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AppIcon from "../../assets/icons/pokeball.png";
 import PokeBagIcon from "../../assets/icons/pokebag.png";
 import HideOnScroll from "../transitions/HideOnScroll";
@@ -13,9 +13,12 @@ import {
 } from "./styles";
 
 const DefaultAppBar = (props) => {
+  const location = useLocation();
+  const pathname = location.pathname || "";
+  const isDetailPage = pathname.match(/^\/pokemon-detail\/.*/);
   return (
     <HideOnScroll>
-      <AppBar css={cssAppBar} {...props}>
+      <AppBar css={cssAppBar(isDetailPage)} {...props}>
         <Toolbar css={cssToolbar}>
           <Typography css={cssMainMenu} variant="h6">
             <Link to="/">
