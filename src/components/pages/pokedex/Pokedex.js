@@ -1,208 +1,62 @@
 /** @jsxImportSource @emotion/react */
+import { useQuery } from "@apollo/client";
+import { css } from "@emotion/react";
+import { Button, CircularProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { flexAllCenter } from "../../../styles/common";
+import {
+  GET_POKEMON_LIST,
+  POKEMON_LIST_LIMIT,
+} from "../../../util/graphql/queries";
 
 import PokemonCard from "../../cards/pokemonCard/PokemonCard";
 import PokemonListContainer from "../../container/PokemonListContainer";
 import PageTitle from "../../text/PageTitle";
-import { cssCardsWrapper } from "./styles";
+import { cssCardsWrapper, cssLoadMoreBtn } from "./styles";
 
-const mock = [
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 5,
-    },
-    name: "bulbasaur",
-    id: 1,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "grass",
-          id: 12,
-        },
-      },
-      {
-        pokemon_v2_type: {
-          name: "poison",
-          id: 4,
-        },
-      },
-      {
-        pokemon_v2_type: {
-          name: "fire",
-          id: 4,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 5,
-    },
-    name: "ivysaur",
-    id: 2,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "grass",
-          id: 12,
-        },
-      },
-      {
-        pokemon_v2_type: {
-          name: "poison",
-          id: 4,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 5,
-    },
-    name: "venusaur",
-    id: 3,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "grass",
-          id: 12,
-        },
-      },
-      {
-        pokemon_v2_type: {
-          name: "poison",
-          id: 4,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 8,
-    },
-    name: "charmander",
-    id: 4,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "fire",
-          id: 10,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 8,
-    },
-    name: "charmeleon",
-    id: 5,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "fire",
-          id: 10,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 8,
-    },
-    name: "charizard",
-    id: 6,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "fire",
-          id: 10,
-        },
-      },
-      {
-        pokemon_v2_type: {
-          name: "flying",
-          id: 3,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 2,
-    },
-    name: "squirtle",
-    id: 7,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "water",
-          id: 11,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 2,
-    },
-    name: "wartortle",
-    id: 8,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "water",
-          id: 11,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 2,
-    },
-    name: "blastoise",
-    id: 9,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "water",
-          id: 11,
-        },
-      },
-    ],
-  },
-  {
-    pokemon_v2_pokemonspecy: {
-      pokemon_color_id: 5,
-    },
-    name: "caterpie",
-    id: 10,
-    pokemon_v2_pokemontypes: [
-      {
-        pokemon_v2_type: {
-          name: "bug",
-          id: 7,
-        },
-      },
-    ],
-  },
-];
+const renderPokemonList = (error, data) => {
+  if (error) return <span>{error.message}</span>;
+  return data.map((pokemon) => {
+    return <PokemonCard key={pokemon.id} pokemon={pokemon} />;
+  });
+};
 
 const Pokedex = (props) => {
   const [pokemons, setPokemons] = useState([]);
+  const [index, setIndex] = useState(0);
+
+  const { loading, error, data } = useQuery(GET_POKEMON_LIST, {
+    variables: { offset: index * POKEMON_LIST_LIMIT },
+    context: { clientName: "beta" },
+  });
 
   useEffect(() => {
-    setPokemons(mock);
-  }, []);
+    if (data) {
+      setPokemons((prevData) => [...prevData, ...data.pokemon_v2_pokemon]);
+    }
+  }, [data]);
 
   return (
     <PokemonListContainer>
       <PageTitle>Pokedex</PageTitle>
       <div css={cssCardsWrapper}>
-        {pokemons.map((pokemon) => {
-          return <PokemonCard key={pokemon.id} pokemon={pokemon} />;
-        })}
+        {renderPokemonList(error, pokemons)}
+      </div>
+      <div
+        css={css`
+          ${flexAllCenter}
+        `}
+      >
+        {loading && <CircularProgress />}
+        {data && (
+          <Button
+            variant="outlined"
+            css={cssLoadMoreBtn}
+            onClick={() => setIndex((prevIdx) => prevIdx + 1)}
+          >
+            Load More
+          </Button>
+        )}
       </div>
     </PokemonListContainer>
   );

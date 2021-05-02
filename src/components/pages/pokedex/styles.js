@@ -112,3 +112,7 @@ export const cssOwnedContainer = (colorId) => css`
     color: white;
   }
 `;
+
+export const cssLoadMoreBtn = css`
+  margin-bottom: 28px;
+`
