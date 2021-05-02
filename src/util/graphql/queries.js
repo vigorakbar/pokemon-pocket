@@ -57,3 +57,13 @@ query pokemonDetail($name: String!) {
   }
 }
 `
+
+export const GET_POKEMON_COLOR_ID = gql`
+query pokemonColorId($id: Int!) {
+  pokemon_v2_pokemon_by_pk(id: $id) {
+    pokemon_v2_pokemonspecy {
+      pokemon_color_id
+    }
+  }
+}
+`
