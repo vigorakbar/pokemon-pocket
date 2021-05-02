@@ -25,6 +25,7 @@ const stopPropagation = (e) => e.stopPropagation();
 
 const PokemonCard = ({
   pokemon,
+  ownedCount,
   onClick,
   onDelete,
   animateHover = true,
@@ -35,6 +36,7 @@ const PokemonCard = ({
   const onClickCard = () => {
     history.push(`/pokemon-detail/${pokemon.name}/${pokemon.id}`);
   };
+
   return (
     <Card css={cssPokeCards(colorId, animateHover)} {...otherProps}>
       <CardActionArea css={cssCardActionArea} onClick={onClickCard}>
@@ -55,7 +57,8 @@ const PokemonCard = ({
                     <b>{pokemon.nickname}</b>
                   ) : (
                     <>
-                      Owned: <b>{pokemon.owned || 0}</b>
+                      Owned:{" "}
+                      <b>{(ownedCount && ownedCount[pokemon.id]) || 0}</b>
                     </>
                   )}
                 </Typography>
