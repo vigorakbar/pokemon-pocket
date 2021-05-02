@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import LazyLoad from "react-lazyload";
 import { useHistory } from "react-router";
 import { spriteURL } from "../../../const/common";
 import pokeColorMap from "../../../const/pokeColorMap";
@@ -76,11 +77,13 @@ const PokemonCard = ({
               <DeleteIcon />
             </IconButton>
           )}
-          <img
-            className="pokemon-sprite"
-            src={`${spriteURL}${pokemon.id}.png`}
-            alt="pokemon sprite"
-          />
+          <LazyLoad height={150}>
+            <img
+              className="pokemon-sprite"
+              src={`${spriteURL}${pokemon.id}.png`}
+              alt="pokemon sprite"
+            />
+          </LazyLoad>
           <PokeballShadowIcon
             className="card-pokeball-decor"
             color={pokeColorMap[colorId]}
