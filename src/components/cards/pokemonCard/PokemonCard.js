@@ -1,10 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import {
-  Card,
-  CardActionArea,
-  IconButton,
-  Typography,
-} from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LazyLoad from "react-lazyload";
 import { useHistory } from "react-router";

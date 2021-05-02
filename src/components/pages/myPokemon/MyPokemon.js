@@ -2,13 +2,11 @@
 import { useEffect, useState } from "react";
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogTitle,
-  Typography,
-} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Typography from "@material-ui/core/Typography";
 import PokemonCard from "../../cards/pokemonCard/PokemonCard";
 import PokemonListContainer from "../../container/PokemonListContainer";
 import PageTitle from "../../text/PageTitle";

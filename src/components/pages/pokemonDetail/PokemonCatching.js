@@ -1,23 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
-import {
-  Backdrop,
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Fab,
-  TextField,
-} from "@material-ui/core";
+import Backdrop from "@material-ui/core/Backdrop";
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Fab from "@material-ui/core/Fab";
+import TextField from "@material-ui/core/TextField";
 import { css } from "@emotion/react";
 import { biggerOnHover } from "../../../styles/animation";
 import OpenPokeballIcon from "../../../assets/icons/open-pokeball.png";
 import { flexAllCenter } from "../../../styles/common";
 import { cssSpriteContainer } from "./styles";
-import forageInstance, { incrementPokemonCount } from "../../../util/dataStorage";
+import forageInstance, {
+  incrementPokemonCount,
+} from "../../../util/dataStorage";
 import { titleCase } from "../../../util/string";
 
 const PokemonCatching = ({ pokemonDetail }) => {
@@ -72,7 +72,7 @@ const PokemonCatching = ({ pokemonDetail }) => {
           })),
         };
         await forageInstance.setItem("myPokemonList", [...pokemonList, data]);
-        await incrementPokemonCount(pokemonDetail.id)
+        await incrementPokemonCount(pokemonDetail.id);
         setLoading(false);
         setModalSuccess(false);
       }

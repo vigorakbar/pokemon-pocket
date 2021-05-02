@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Typography, useTheme } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import { useTheme } from "@material-ui/core/styles";
 import palettes from "../../const/palettes";
 
 const cssTitle = (theme) => css`

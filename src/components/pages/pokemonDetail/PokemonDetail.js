@@ -1,16 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router";
-import {
-  LinearProgress,
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  Tabs,
-  useTheme,
-} from "@material-ui/core";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Tab from "@material-ui/core/Tab";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
+import Tabs from "@material-ui/core/Tabs";
+import { useTheme } from "@material-ui/core/styles";
 import SwipeableViews from "react-swipeable-views";
 import { titleCase } from "../../../util/string";
 import PageTitle from "../../text/PageTitle";
@@ -233,7 +231,7 @@ const PokemonDetail = () => {
             </SwipeableViews>
           </div>
         </div>
-        <PokemonCatching pokemonDetail={{...pokemonDetail, name }} />
+        <PokemonCatching pokemonDetail={{ ...pokemonDetail, name }} />
       </div>
       <div css={cssPageBackground(pokemonDetail.colorId)} />
     </>

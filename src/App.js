@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Container } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
 import { Redirect, Route, Switch } from "react-router";
 import DefaultAppBar from "./components/appBar/AppBar";
 import MyPokemon from "./components/pages/myPokemon/MyPokemon";

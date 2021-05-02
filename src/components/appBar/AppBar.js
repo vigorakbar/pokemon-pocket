@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import { Link, useRouteMatch } from "react-router-dom";
 import AppIcon from "../../assets/icons/pokeball.png";
 import PokeBagIcon from "../../assets/icons/pokebag.png";

@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { useQuery } from "@apollo/client";
 import { css } from "@emotion/react";
-import { Button, CircularProgress } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useEffect, useState } from "react";
 import { flexAllCenter } from "../../../styles/common";
 import forageInstance from "../../../util/dataStorage";
@@ -18,7 +19,9 @@ import { cssCardsWrapper, cssLoadMoreBtn } from "./styles";
 const renderPokemonList = (error, data, ownedCount) => {
   if (error) return <span>{error.message}</span>;
   return data.map((pokemon) => {
-    return <PokemonCard key={pokemon.id} pokemon={pokemon} ownedCount={ownedCount} />;
+    return (
+      <PokemonCard key={pokemon.id} pokemon={pokemon} ownedCount={ownedCount} />
+    );
   });
 };
 
@@ -49,7 +52,9 @@ const Pokedex = (props) => {
   return (
     <PokemonListContainer>
       <PageTitle>Pokedex</PageTitle>
-      <div css={cssCardsWrapper}>{renderPokemonList(error, pokemons, ownedCount)}</div>
+      <div css={cssCardsWrapper}>
+        {renderPokemonList(error, pokemons, ownedCount)}
+      </div>
       <div
         css={css`
           ${flexAllCenter}
