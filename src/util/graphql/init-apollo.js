@@ -1,7 +1,16 @@
-import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloLink,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 
-const pokeAPIBetaLink = 'https://beta.pokeapi.co/graphql/v1beta';
-const mazipanLink = 'https://graphql-pokeapi.vercel.app/api/graphql'
+const pokeAPIBetaLink = new HttpLink({
+  uri: "https://beta.pokeapi.co/graphql/v1beta",
+});
+const mazipanLink = new HttpLink({
+  uri: "https://graphql-pokeapi.vercel.app/api/graphql",
+});
 
 export const client = new ApolloClient({
   link: ApolloLink.split(
