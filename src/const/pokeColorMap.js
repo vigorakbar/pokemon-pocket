@@ -15,6 +15,7 @@ const pokeColorMap = {
   8: pokeColors.red,
   9: pokeColors.blue,
   10: pokeColors.yellow,
+  11: '#b2b2b2',
 };
 
 export default pokeColorMap;

@@ -1,4 +1,5 @@
-import { Box, Typography } from "@material-ui/core";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -12,9 +13,15 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
+        <div
+          css={css`
+            height: calc(50vh - 60px);
+            padding: 20px;
+            overflow: auto;
+          `}
+        >
+          {children}
+        </div>
       )}
     </div>
   );

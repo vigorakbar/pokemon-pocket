@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import pokeColorMap from "../../../const/pokeColorMap";
+import palettes from "../../../const/palettes";
 import { flexAllCenter, fontFamily } from "../../../styles/common";
 import { cssTypesWrapper } from "../pokedex/styles";
 
@@ -48,7 +49,7 @@ export const cssTabsContainer = css`
   border-radius: 24px 24px 0 0;
 `;
 
-export const cssTabs = (theme) => css`
+export const cssTabs = css`
   border-bottom: 1px solid rgb(0, 0, 0, 0.1);
   .MuiTabs-indicator {
     display: flex;
@@ -57,7 +58,7 @@ export const cssTabs = (theme) => css`
     & > span {
       max-width: 84px;
       width: 100%;
-      background-color: ${theme.palette.primary.main};
+      background-color: ${palettes.pokeColors.blue};
     }
   }
 `;
@@ -69,4 +70,14 @@ export const cssPageBackground = (colorId) => css`
   left: 0;
   z-index: -1;
   background-color: ${pokeColorMap[colorId]};
+`;
+
+export const cssPageDecor = css`
+  position: absolute;
+  top: 180px;
+  right: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  opacity: 0.35;
+  filter: brightness(150%);
 `;

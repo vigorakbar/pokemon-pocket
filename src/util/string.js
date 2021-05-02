@@ -1,1 +1,4 @@
-export const titleCase = (str = '') => (`${str[0].toUpperCase()}${str.slice(1)}`)
+export const titleCase = (str = '') => {
+  const firstLetter = (str[0] && str[0].toUpperCase()) || "";
+  return `${firstLetter}${str.slice(1)}`;
+};
