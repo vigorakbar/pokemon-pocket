@@ -15,7 +15,6 @@ import SwipeableViews from "react-swipeable-views";
 import { titleCase } from "../../../util/string";
 import PageTitle from "../../text/PageTitle";
 import TypeChip from "../../cards/pokemonCard/TypeChip";
-import { spriteURL } from "../../../const/common";
 import palettes from "../../../const/palettes";
 import {
   GET_POKEMON_COLOR_ID,
