@@ -11,9 +11,10 @@ import {
   cssMyPokeMenu,
   cssToolbar,
 } from "./styles";
+import { MY_POKEMON_PAGE, POKEMON_DETAIL_PAGE } from "../../const/pages";
 
 const DefaultAppBar = (props) => {
-  const isDetailPage = useRouteMatch("/pokemon-detail/:name/:id");
+  const isDetailPage = useRouteMatch(POKEMON_DETAIL_PAGE);
 
   return (
     <HideOnScroll>
@@ -31,7 +32,7 @@ const DefaultAppBar = (props) => {
               </div>
             </Link>
           </Typography>
-          <Link to="/my-pokemon" css={cssMyPokeMenu}>
+          <Link to={MY_POKEMON_PAGE} css={cssMyPokeMenu}>
             <div className="icon-wrapper">
               <img
                 src={PokeBagIcon}

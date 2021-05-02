@@ -34,7 +34,9 @@ const PokemonCard = ({
   const colorId = pokemon.pokemon_v2_pokemonspecy.pokemon_color_id;
   const history = useHistory();
   const onClickCard = () => {
-    history.push(`/pokemon-detail/${pokemon.name}/${pokemon.id}`);
+    history.push(
+      `/pokemon-pocket/pokemon-detail/${pokemon.name}/${pokemon.id}`
+    );
   };
 
   return (

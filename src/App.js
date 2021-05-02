@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Container } from "@material-ui/core";
-import { Route, Switch } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
 import DefaultAppBar from "./components/appBar/AppBar";
 import MyPokemon from "./components/pages/myPokemon/MyPokemon";
 import Pokedex from "./components/pages/pokedex/Pokedex";
 import PokemonDetail from "./components/pages/pokemonDetail/PokemonDetail";
+import { MY_POKEMON_PAGE, POKEDEX_PAGE, POKEMON_DETAIL_PAGE } from "./const/pages";
 
 function App() {
   return (
@@ -22,13 +23,16 @@ function App() {
         `}
       >
         <Switch>
-          <Route exact path="/">
+        <Route exact path='/' >
+          <Redirect to={POKEDEX_PAGE} />
+        </Route>
+          <Route exact path={POKEDEX_PAGE}>
             <Pokedex />
           </Route>
-          <Route path="/my-pokemon">
+          <Route path={MY_POKEMON_PAGE}>
             <MyPokemon />
           </Route>
-          <Route path="/pokemon-detail/:name/:id">
+          <Route path={POKEMON_DETAIL_PAGE}>
             <PokemonDetail />
           </Route>
         </Switch>
