@@ -1,20 +1,25 @@
 /** @jsxImportSource @emotion/react */
-
-import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router";
-import { Box, Tab, Tabs, Typography, useTheme } from "@material-ui/core";
+import { Tab, Tabs, useTheme } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import { titleCase } from "../../../util/string";
 import PageTitle from "../../text/PageTitle";
-import pokeColorMap from "../../../const/pokeColorMap";
 import TypeChip from "../../cards/pokemonCard/TypeChip";
-import { cssTypesWrapper } from "../pokedex/styles";
 import { spriteURL } from "../../../const/common";
-import { flexAllCenter, fontFamily } from "../../../styles/common";
 import { GET_POKEMON_DETAIL } from "../../../util/graphql/queries";
 import { useQuery } from "@apollo/client";
 import TabPanel from "./TabPanel";
+import {
+  cssDetailTypesWrapper,
+  cssPageBackground,
+  cssPageRoot,
+  cssPageTitle,
+  cssSpriteContainer,
+  cssTabRoot,
+  cssTabs,
+  cssTabsContainer,
+} from "./styles";
 
 const mock = {
   id: 1,
@@ -28,78 +33,6 @@ function a11yProps(index) {
     "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
-
-// =====================================
-
-const cssPageRoot = css`
-  height: calc(100% - 323px);
-`;
-
-const cssTabRoot = css`
-  ${fontFamily}
-  text-transform: unset;
-  border-radius: 32px;
-`;
-
-const cssDetailTypesWrapper = (colorId, theme) => css`
-  ${cssTypesWrapper(mock.colorId)}
-  max-width: 100%;
-  ${theme.breakpoints.up("sm")} {
-    text-align: center;
-  }
-`;
-
-const cssPageTitle = css`
-  color: white;
-  margin-top: 6px;
-`;
-
-const cssSpriteContainer = css`
-  ${flexAllCenter}
-  position: relative;
-  z-index: 2;
-
-  .sprite-image {
-    width: 200px;
-    height: 200px;
-  }
-`;
-
-const cssTabsContainer = css`
-  background-color: white;
-  height: calc(100% + 42px);
-  width: calc(100% + 32px);
-  position: relative;
-  left: -16px;
-  top: -24px;
-  padding-top: 8px;
-  border-radius: 24px 24px 0 0;
-`;
-
-const cssTabs = (theme) => css`
-  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
-  .MuiTabs-indicator {
-    display: flex;
-    justify-content: center;
-    background-color: transparent;
-    & > span {
-      max-width: 84px;
-      width: 100%;
-      background-color: ${theme.palette.primary.main};
-    }
-  }
-`;
-const cssPageBackground = (colorId) => css`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  background-color: ${pokeColorMap[colorId]};
-`;
-
-// =====================================
 
 const PokemonDetail = () => {
   const match = useRouteMatch();
