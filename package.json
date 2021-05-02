@@ -2,6 +2,7 @@
   "name": "pokemon-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vigorakbar.github.io/pokemon-app/",
   "dependencies": {
     "@apollo/client": "^3.3.15",
     "@emotion/react": "^11.1.5",
