@@ -38,6 +38,7 @@ import { css } from "@emotion/react";
 import { fontFamily } from "../../../styles/common";
 import PokeballShadowIcon from "../../svg/PokeballShadowIcon";
 import pokeColorMap from "../../../const/pokeColorMap";
+import PokemonCatching from "./PokemonCatching";
 
 function a11yProps(index) {
   return {
@@ -115,7 +116,7 @@ const PokemonDetail = () => {
         <div css={cssSpriteContainer}>
           <img
             className="sprite-image"
-            src={`${spriteURL}${pokemonDetail.id}.png`}
+            src={pokemonDetail.sprites?.front_default}
             alt="pokemon sprite"
           />
         </div>
@@ -177,7 +178,11 @@ const PokemonDetail = () => {
                 </Table>
               </TabPanel>
               <TabPanel value={tabValue} index={1} dir={theme.direction}>
-                <Table>
+                <Table
+                  css={css`
+                    margin-bottom: 100px;
+                  `}
+                >
                   <TableBody>
                     {(pokemonDetail.stats || []).map((stat = {}, i) => (
                       <TableRow key={i}>
@@ -214,7 +219,12 @@ const PokemonDetail = () => {
                 </Table>
               </TabPanel>
               <TabPanel value={tabValue} index={2} dir={theme.direction}>
-                <div css={cssDetailTypesWrapper(11, theme)}>
+                <div
+                  css={css`
+                    ${cssDetailTypesWrapper(11, theme)}
+                    margin-bottom: 100px;
+                  `}
+                >
                   {pokemonDetail.moves &&
                     pokemonDetail.moves.map((data, i) => (
                       <TypeChip key={i} name={data?.move?.name} />
@@ -224,6 +234,7 @@ const PokemonDetail = () => {
             </SwipeableViews>
           </div>
         </div>
+        <PokemonCatching pokemonDetail={{...pokemonDetail, name }} />
       </div>
       <div css={cssPageBackground(pokemonDetail.colorId)} />
     </>

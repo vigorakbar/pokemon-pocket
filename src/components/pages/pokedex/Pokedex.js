@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import { Button, CircularProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { flexAllCenter } from "../../../styles/common";
+import forageInstance from "../../../util/dataStorage";
 import {
   GET_POKEMON_LIST,
   POKEMON_LIST_LIMIT,
@@ -14,21 +15,30 @@ import PokemonListContainer from "../../container/PokemonListContainer";
 import PageTitle from "../../text/PageTitle";
 import { cssCardsWrapper, cssLoadMoreBtn } from "./styles";
 
-const renderPokemonList = (error, data) => {
+const renderPokemonList = (error, data, ownedCount) => {
   if (error) return <span>{error.message}</span>;
   return data.map((pokemon) => {
-    return <PokemonCard key={pokemon.id} pokemon={pokemon} />;
+    return <PokemonCard key={pokemon.id} pokemon={pokemon} ownedCount={ownedCount} />;
   });
 };
 
 const Pokedex = (props) => {
   const [pokemons, setPokemons] = useState([]);
   const [index, setIndex] = useState(0);
+  const [ownedCount, setOwnedCount] = useState({});
 
   const { loading, error, data } = useQuery(GET_POKEMON_LIST, {
     variables: { offset: index * POKEMON_LIST_LIMIT },
     context: { clientName: "beta" },
   });
+
+  useEffect(() => {
+    async function getOwnedCount() {
+      const result = await forageInstance.getItem("myPokemonCount");
+      setOwnedCount(result);
+    }
+    getOwnedCount();
+  }, []);
 
   useEffect(() => {
     if (data) {
@@ -39,9 +49,7 @@ const Pokedex = (props) => {
   return (
     <PokemonListContainer>
       <PageTitle>Pokedex</PageTitle>
-      <div css={cssCardsWrapper}>
-        {renderPokemonList(error, pokemons)}
-      </div>
+      <div css={cssCardsWrapper}>{renderPokemonList(error, pokemons, ownedCount)}</div>
       <div
         css={css`
           ${flexAllCenter}
