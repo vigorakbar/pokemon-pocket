@@ -19,3 +19,41 @@ export const GET_POKEMON_LIST = gql`
     }
   }
 `;
+
+export const GET_POKEMON_DETAIL = gql`
+query pokemonDetail($name: String!) {
+  pokemon(name: $name) {
+    stats {
+      base_stat
+      stat {
+        name
+      }
+    }
+    moves {
+      move {
+        name
+      }
+    }
+    types{
+      type {
+        name
+      }
+    }
+    abilities {
+      ability {
+        name
+        url
+      }
+    }
+    id
+    weight
+    height
+    sprites {
+      front_default
+    }
+    species {
+      name
+    }
+  }
+}
+`
