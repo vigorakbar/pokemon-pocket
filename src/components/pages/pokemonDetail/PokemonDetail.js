@@ -1,13 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router";
-import { Tab, Tabs, useTheme } from "@material-ui/core";
+import { LinearProgress, Tab, Tabs, useTheme } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import { titleCase } from "../../../util/string";
 import PageTitle from "../../text/PageTitle";
 import TypeChip from "../../cards/pokemonCard/TypeChip";
 import { spriteURL } from "../../../const/common";
-import { GET_POKEMON_DETAIL } from "../../../util/graphql/queries";
+import {
+  GET_POKEMON_COLOR_ID,
+  GET_POKEMON_DETAIL,
+} from "../../../util/graphql/queries";
 import { useQuery } from "@apollo/client";
 import TabPanel from "./TabPanel";
 import {
@@ -21,12 +24,6 @@ import {
   cssTabsContainer,
 } from "./styles";
 
-const mock = {
-  id: 1,
-  types: ["water", "bug"],
-  colorId: 5,
-};
-
 function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
@@ -36,7 +33,7 @@ function a11yProps(index) {
 
 const PokemonDetail = () => {
   const match = useRouteMatch();
-  const name = match.params.name;
+  const { id, name } = match.params;
   const theme = useTheme();
   const [pokemonDetail, setPokemonDetail] = useState({});
   const [tabValue, setTabValue] = useState(0);
@@ -45,21 +42,44 @@ const PokemonDetail = () => {
     variables: { name },
   });
 
+  const {
+    loading: colorLoading,
+    error: colorError,
+    data: colorData,
+  } = useQuery(GET_POKEMON_COLOR_ID, {
+    variables: { id: Number(id) },
+    context: { clientName: "beta" },
+  });
+
   useEffect(() => {
-    if (data) {
-      console.log(data);
-      setPokemonDetail(data.pokemon);
+    if (data && colorData) {
+      const color = {
+        colorId:
+          colorData.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonspecy
+            .pokemon_color_id,
+      };
+      console.log(data.pokemon);
+      console.log(colorData);
+      setPokemonDetail({
+        ...data.pokemon,
+        ...color,
+      });
     }
-  }, [data]);
+  }, [data, colorData]);
+
+  if (loading || colorLoading) return <LinearProgress />;
+  if (error || colorError)
+    return <span>Error! {error ? error.message : colorError.message}</span>;
 
   return (
     <>
       <div css={cssPageRoot}>
         <PageTitle css={cssPageTitle}>{titleCase(name)}</PageTitle>
-        <div css={cssDetailTypesWrapper(mock.colorId, theme)}>
-          {mock.types.map((type, i) => (
-            <TypeChip key={i} name={type} />
-          ))}
+        <div css={cssDetailTypesWrapper(pokemonDetail.colorId, theme)}>
+          {pokemonDetail.types &&
+            pokemonDetail.types.map((data, i) => (
+              <TypeChip key={i} name={data?.type?.name} />
+            ))}
         </div>
         <div css={cssSpriteContainer}>
           <img
@@ -100,7 +120,7 @@ const PokemonDetail = () => {
           </div>
         </div>
       </div>
-      <div css={cssPageBackground} />
+      <div css={cssPageBackground(pokemonDetail.colorId)} />
     </>
   );
 };

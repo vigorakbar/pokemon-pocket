@@ -33,7 +33,7 @@ const PokemonCard = ({
   const colorId = pokemon.pokemon_v2_pokemonspecy.pokemon_color_id;
   const history = useHistory();
   const onClickCard = () => {
-    history.push(`/pokemon-detail/${pokemon.name}`);
+    history.push(`/pokemon-detail/${pokemon.name}/${pokemon.id}`);
   };
   return (
     <Card css={cssPokeCards(colorId, animateHover)} {...otherProps}>

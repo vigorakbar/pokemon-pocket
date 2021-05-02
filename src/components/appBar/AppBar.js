@@ -13,7 +13,7 @@ import {
 } from "./styles";
 
 const DefaultAppBar = (props) => {
-  const isDetailPage = useRouteMatch("/pokemon-detail/:id");
+  const isDetailPage = useRouteMatch("/pokemon-detail/:name/:id");
 
   return (
     <HideOnScroll>

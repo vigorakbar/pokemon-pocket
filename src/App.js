@@ -28,7 +28,7 @@ function App() {
           <Route path="/my-pokemon">
             <MyPokemon />
           </Route>
-          <Route path="/pokemon-detail/:name">
+          <Route path="/pokemon-detail/:name/:id">
             <PokemonDetail />
           </Route>
         </Switch>
