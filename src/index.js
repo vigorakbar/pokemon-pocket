@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 import { StylesProvider } from "@material-ui/core/styles";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./util/graphql/init-apollo";
 
 ReactDOM.render(
   <React.Fragment>
     <BrowserRouter>
       <StylesProvider injectFirst>
-        <App />
+        <ApolloProvider client={client}>
+          <App />
+        </ApolloProvider>
       </StylesProvider>
     </BrowserRouter>
   </React.Fragment>,
