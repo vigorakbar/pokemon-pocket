@@ -12,6 +12,9 @@ import TypeChip from "../../cards/pokemonCard/TypeChip";
 import { cssTypesWrapper } from "../pokedex/styles";
 import { spriteURL } from "../../../const/common";
 import { flexAllCenter, fontFamily } from "../../../styles/common";
+import { GET_POKEMON_DETAIL } from "../../../util/graphql/queries";
+import { useQuery } from "@apollo/client";
+import TabPanel from "./TabPanel";
 
 const mock = {
   id: 1,
@@ -26,36 +29,77 @@ function a11yProps(index) {
   };
 }
 
+// =====================================
+
+const cssPageRoot = css`
+  height: calc(100% - 323px);
+`;
+
 const cssTabRoot = css`
   ${fontFamily}
   text-transform: unset;
   border-radius: 32px;
 `;
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-const cssDetailTypesWrapper = css`
+const cssDetailTypesWrapper = (colorId, theme) => css`
   ${cssTypesWrapper(mock.colorId)}
   max-width: 100%;
+  ${theme.breakpoints.up("sm")} {
+    text-align: center;
+  }
 `;
+
+const cssPageTitle = css`
+  color: white;
+  margin-top: 6px;
+`;
+
+const cssSpriteContainer = css`
+  ${flexAllCenter}
+  position: relative;
+  z-index: 2;
+
+  .sprite-image {
+    width: 200px;
+    height: 200px;
+  }
+`;
+
+const cssTabsContainer = css`
+  background-color: white;
+  height: calc(100% + 42px);
+  width: calc(100% + 32px);
+  position: relative;
+  left: -16px;
+  top: -24px;
+  padding-top: 8px;
+  border-radius: 24px 24px 0 0;
+`;
+
+const cssTabs = (theme) => css`
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+  .MuiTabs-indicator {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    & > span {
+      max-width: 84px;
+      width: 100%;
+      background-color: ${theme.palette.primary.main};
+    }
+  }
+`;
+const cssPageBackground = (colorId) => css`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: ${pokeColorMap[colorId]};
+`;
+
+// =====================================
 
 const PokemonDetail = () => {
   const match = useRouteMatch();
@@ -64,65 +108,34 @@ const PokemonDetail = () => {
   const [pokemonDetail, setPokemonDetail] = useState({});
   const [tabValue, setTabValue] = useState(0);
 
+  const { loading, error, data } = useQuery(GET_POKEMON_DETAIL, {
+    variables: { name },
+  });
+
   useEffect(() => {
-    setPokemonDetail(mock);
-  }, []);
+    if (data) {
+      console.log(data);
+      setPokemonDetail(data.pokemon);
+    }
+  }, [data]);
 
   return (
     <>
-      <div
-        css={css`
-          height: calc(100% - 323px);
-        `}
-      >
-        <PageTitle
-          css={css`
-            color: white;
-            margin-top: 6px;
-          `}
-        >
-          {titleCase(name)}
-        </PageTitle>
-        <div
-          css={css`
-            ${cssDetailTypesWrapper}
-            ${theme.breakpoints.up("sm")} {
-              text-align: center;
-            }
-          `}
-        >
+      <div css={cssPageRoot}>
+        <PageTitle css={cssPageTitle}>{titleCase(name)}</PageTitle>
+        <div css={cssDetailTypesWrapper(mock.colorId, theme)}>
           {mock.types.map((type, i) => (
             <TypeChip key={i} name={type} />
           ))}
         </div>
-        <div
-          css={css`
-            ${flexAllCenter}
-            position: relative;
-            z-index: 2;
-          `}
-        >
+        <div css={cssSpriteContainer}>
           <img
-            css={css`
-              width: 200px;
-              height: 200px;
-            `}
+            className="sprite-image"
             src={`${spriteURL}${pokemonDetail.id}.png`}
             alt="pokemon sprite"
           />
         </div>
-        <div
-          css={css`
-            background-color: white;
-            height: calc(100% + 42px);
-            width: calc(100% + 32px);
-            position: relative;
-            left: -16px;
-            top: -24px;
-            padding-top: 8px;
-            border-radius: 24px 24px 0 0;
-          `}
-        >
+        <div css={cssTabsContainer}>
           <div>
             <Tabs
               value={tabValue}
@@ -130,19 +143,7 @@ const PokemonDetail = () => {
               indicatorColor="primary"
               variant="fullWidth"
               TabIndicatorProps={{ children: <span /> }}
-              css={css`
-                border-bottom: 1px solid rgb(0, 0, 0, 0.1);
-                .MuiTabs-indicator {
-                  display: flex;
-                  justify-content: center;
-                  background-color: transparent;
-                  & > span {
-                    max-width: 84px;
-                    width: 100%;
-                    background-color: ${theme.palette.primary.main};
-                  }
-                }
-              `}
+              css={cssTabs(theme)}
             >
               {["About", "Base Stats", "Moves"].map((label, i) => (
                 <Tab css={cssTabRoot} key={i} label={label} {...a11yProps(i)} />
@@ -166,17 +167,7 @@ const PokemonDetail = () => {
           </div>
         </div>
       </div>
-      <div
-        css={css`
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-          z-index: -1;
-          background-color: ${pokeColorMap[pokemonDetail.colorId]};
-        `}
-      />
+      <div css={cssPageBackground} />
     </>
   );
 };
