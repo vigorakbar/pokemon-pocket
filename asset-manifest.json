@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/pokemon-app/static/css/main.84000fbb.chunk.css",
-    "main.js": "/pokemon-app/static/js/main.4f5b6fd0.chunk.js",
-    "main.js.map": "/pokemon-app/static/js/main.4f5b6fd0.chunk.js.map",
-    "runtime-main.js": "/pokemon-app/static/js/runtime-main.fb65470e.js",
-    "runtime-main.js.map": "/pokemon-app/static/js/runtime-main.fb65470e.js.map",
-    "static/js/2.42fcdb20.chunk.js": "/pokemon-app/static/js/2.42fcdb20.chunk.js",
-    "static/js/2.42fcdb20.chunk.js.map": "/pokemon-app/static/js/2.42fcdb20.chunk.js.map",
-    "static/js/3.aa8e32f7.chunk.js": "/pokemon-app/static/js/3.aa8e32f7.chunk.js",
-    "static/js/3.aa8e32f7.chunk.js.map": "/pokemon-app/static/js/3.aa8e32f7.chunk.js.map",
-    "index.html": "/pokemon-app/index.html",
-    "static/css/main.84000fbb.chunk.css.map": "/pokemon-app/static/css/main.84000fbb.chunk.css.map",
-    "static/js/2.42fcdb20.chunk.js.LICENSE.txt": "/pokemon-app/static/js/2.42fcdb20.chunk.js.LICENSE.txt"
+    "main.css": "/pokemon-pocket/static/css/main.84000fbb.chunk.css",
+    "main.js": "/pokemon-pocket/static/js/main.4f5b6fd0.chunk.js",
+    "main.js.map": "/pokemon-pocket/static/js/main.4f5b6fd0.chunk.js.map",
+    "runtime-main.js": "/pokemon-pocket/static/js/runtime-main.161412bd.js",
+    "runtime-main.js.map": "/pokemon-pocket/static/js/runtime-main.161412bd.js.map",
+    "static/js/2.42fcdb20.chunk.js": "/pokemon-pocket/static/js/2.42fcdb20.chunk.js",
+    "static/js/2.42fcdb20.chunk.js.map": "/pokemon-pocket/static/js/2.42fcdb20.chunk.js.map",
+    "static/js/3.aa8e32f7.chunk.js": "/pokemon-pocket/static/js/3.aa8e32f7.chunk.js",
+    "static/js/3.aa8e32f7.chunk.js.map": "/pokemon-pocket/static/js/3.aa8e32f7.chunk.js.map",
+    "index.html": "/pokemon-pocket/index.html",
+    "static/css/main.84000fbb.chunk.css.map": "/pokemon-pocket/static/css/main.84000fbb.chunk.css.map",
+    "static/js/2.42fcdb20.chunk.js.LICENSE.txt": "/pokemon-pocket/static/js/2.42fcdb20.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.fb65470e.js",
+    "static/js/runtime-main.161412bd.js",
     "static/js/2.42fcdb20.chunk.js",
     "static/css/main.84000fbb.chunk.css",
     "static/js/main.4f5b6fd0.chunk.js"
